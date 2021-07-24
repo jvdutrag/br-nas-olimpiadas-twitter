@@ -62,13 +62,11 @@ agenda.define('TWEET_CURRENT_EVENT', job => {
 
         📺 TV Globo/Globoplay`;
     }
-
-    console.log(tweet)
-
-/*     TwitterAPI.post('statuses/update', { status: tweet })
+    
+    TwitterAPI.post('statuses/update', { status: tweet })
     .catch(err => {
         console.log('Erro ao tweetar!', err);
-    }); */
+    });
 });
 
 agenda.define('TWEET_SOON_EVENT', job => {
@@ -105,12 +103,10 @@ agenda.define('TWEET_SOON_EVENT', job => {
         📺 TV Globo/Globoplay`;
     }
 
-    console.log(tweet)
-
-/*     TwitterAPI.post('statuses/update', { status: tweet })
+    TwitterAPI.post('statuses/update', { status: tweet })
     .catch(err => {
         console.log('Erro ao tweetar!', err);
-    }); */
+    });
 });
 
 (async function () {
@@ -120,7 +116,5 @@ agenda.define('TWEET_SOON_EVENT', job => {
     await agenda.every('00 12 * * *', 'SCHEDULE_ALL_TWEETS');
 
     await agenda.now('SCHEDULE_ALL_TWEETS');
-
-    console.log(moment().format('DD-MM-YYYY HH:mm:ss'))
 })();
 
