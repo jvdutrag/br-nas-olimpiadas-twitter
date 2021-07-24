@@ -36,31 +36,13 @@ agenda.define('TWEET_CURRENT_EVENT', job => {
 
     if(game.participants) {
         if(game.participants.type === 'ATHLETES') {
-            tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n
-
-            ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n
-
-            ${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} (${game.participants.entities[0].origin.name})\n
-            vs\n
-            ${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name} (${game.participants.entities[1].origin.name})\n\n
-
-            📺 TV Globo/Globoplay`;
+            tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} (${game.participants.entities[0].origin.name})\nvs\n${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name} (${game.participants.entities[1].origin.name})\n\n📺 TV Globo/Globoplay`;
         }
         else if(game.participants.type === 'COUNTRIES') {
-            tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n
-
-            ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n
-
-            ${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} vs ${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name}\n\n 
-
-            📺 TV Globo/Globoplay`;
+            tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} vs ${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name}\n\n📺 TV Globo/Globoplay`;
         }
     } else {
-        tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n
-
-        ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n
-
-        📺 TV Globo/Globoplay`;
+        tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n📺 TV Globo/Globoplay`;
     }
     
     TwitterAPI.post('statuses/update', { status: tweet })
@@ -76,31 +58,13 @@ agenda.define('TWEET_SOON_EVENT', job => {
 
     if(game.participants) {
         if(game.participants.type === 'ATHLETES') {
-            tweet = `🔔 ANOTA AÍ! Hoje (${moment(game.starts_at).format('DD/MM')}) às ${moment(game.starts_at).format('HH:mm')} \n\n
-
-            ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n
-
-            ${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} (${game.participants.entities[0].origin.name})\n
-            vs\n
-            ${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name} (${game.participants.entities[1].origin.name})\n\n
-
-            📺 TV Globo/Globoplay`;
+            tweet = `🔔 ANOTA AÍ! Hoje (${moment(game.starts_at).format('DD/MM')}) às ${moment(game.starts_at).format('HH:mm')} \n\n${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} (${game.participants.entities[0].origin.name})\nvs\n${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name} (${game.participants.entities[1].origin.name})\n\n📺 TV Globo/Globoplay`;
         }
         else if(game.participants.type === 'COUNTRIES') {
-            tweet = `🔔 ANOTA AÍ! Hoje (${moment(game.starts_at).format('DD/MM')}) às ${moment(game.starts_at).format('HH:mm')} \n\n
-
-            ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n
-
-            ${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} vs ${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name}\n\n 
-
-            📺 TV Globo/Globoplay`;
+            tweet = `🔔 ANOTA AÍ! Hoje (${moment(game.starts_at).format('DD/MM')}) às ${moment(game.starts_at).format('HH:mm')} \n\n ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} vs ${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name}\n\n📺 TV Globo/Globoplay`;
         }
     } else {
-        tweet = `🔔 ANOTA AÍ! Hoje (${moment(game.starts_at).format('DD/MM')}) às ${moment(game.starts_at).format('HH:mm')} \n\n
-
-        ${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n
-
-        📺 TV Globo/Globoplay`;
+        tweet = `🔔 ANOTA AÍ! Hoje (${moment(game.starts_at).format('DD/MM')}) às ${moment(game.starts_at).format('HH:mm')} \n\n${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n📺 TV Globo/Globoplay`;
     }
 
     TwitterAPI.post('statuses/update', { status: tweet })
