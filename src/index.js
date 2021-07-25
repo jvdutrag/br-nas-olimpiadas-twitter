@@ -22,7 +22,7 @@ agenda.define('SCHEDULE_ALL_TWEETS', async () => {
     // Para cada jogo do dia, agendar os tweets
     games.forEach(async game => {
         // Hoje haverá um jogo às XX:XX
-        agenda.schedule(new Date(moment(game.starts_at).subtract('4', 'hours').format('YYYY-MM-DD HH:mm:ss')), 'TWEET_SOON_EVENT', game);
+        //agenda.schedule(new Date(moment(game.starts_at).subtract('4', 'hours').format('YYYY-MM-DD HH:mm:ss')), 'TWEET_SOON_EVENT', game);
 
         // Um jogo começou
         agenda.schedule(new Date(moment(game.starts_at).format('YYYY-MM-DD HH:mm:ss')), 'TWEET_CURRENT_EVENT', game);
@@ -76,7 +76,7 @@ agenda.define('TWEET_SOON_EVENT', job => {
 (async function () {
     await agenda.start();
   
-    // Todos os dias
-    await agenda.every('00 12 * * *', 'SCHEDULE_ALL_TWEETS');
+    // Todos os dias - meia noite
+    await agenda.every('00 00 * * *', 'SCHEDULE_ALL_TWEETS');
 })();
 
