@@ -34,6 +34,10 @@ agenda.define('TWEET_CURRENT_EVENT', job => {
 
     var tweet = null;
 
+    if(!game) {
+        return;
+    }
+
     if(game.participants) {
         if(game.participants.type === 'ATHLETES') {
             tweet = `🔥 COMEÇOU! VAI BRASIL! 🇧🇷\n\n${game.sport} ${game.modality} ${game.category} (${game.stage}) \n\n${game.participants.entities[0].emoji_flag} ${game.participants.entities[0].name} (${game.participants.entities[0].origin.name})\nvs\n${game.participants.entities[1].emoji_flag} ${game.participants.entities[1].name} (${game.participants.entities[1].origin.name})\n\n📺 TV Globo/Globoplay`;
