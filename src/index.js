@@ -21,8 +21,9 @@ agenda.define('SCHEDULE_ALL_TWEETS', async () => {
 
     // Para cada jogo do dia, agendar os tweets
     games.forEach(async game => {
-        // Hoje haverá um jogo às XX:XX
-        //agenda.schedule(new Date(moment(game.starts_at).subtract('4', 'hours').format('YYYY-MM-DD HH:mm:ss')), 'TWEET_SOON_EVENT', game);
+        if(!game) {
+            return;
+        }
 
         // Um jogo começou
         agenda.schedule(new Date(moment(game.starts_at).format('YYYY-MM-DD HH:mm:ss')), 'TWEET_CURRENT_EVENT', game);
@@ -33,10 +34,6 @@ agenda.define('TWEET_CURRENT_EVENT', job => {
     const game = job.attrs.data;
 
     var tweet = null;
-
-    if(!game) {
-        return;
-    }
 
     if(game.participants) {
         if(game.participants.type === 'ATHLETES') {
@@ -57,10 +54,6 @@ agenda.define('TWEET_CURRENT_EVENT', job => {
 
 agenda.define('TWEET_SOON_EVENT', job => {
     const game = job.attrs.data;
-
-    if(!game) {
-        return;
-    }
 
     var tweet = null;
 
