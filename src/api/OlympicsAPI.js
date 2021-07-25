@@ -65,47 +65,51 @@ class OlympicsAPI {
     }
 
     _parseData(array) {
-        function parseEachEvent(data) {
-            function getOrigin(origin) {
-                const code = countries.getAlpha2Code(
-                    origin.represents ?
-                        origin.represents.name === 'Atletas da Rússia' ? 'Rússia' : origin.represents.name 
-                    :
-                        origin.name === 'Atletas da Rússia' ? 'Rússia' : origin.name, 
-                    'pt'
-                );
-
+        try {
+            function parseEachEvent(data) {
+                function getOrigin(origin) {
+                    const code = countries.getAlpha2Code(
+                        origin.represents ?
+                            origin.represents.name === 'Atletas da Rússia' ? 'Rússia' : origin.represents.name 
+                        :
+                            origin.name === 'Atletas da Rússia' ? 'Rússia' : origin.name, 
+                        'pt'
+                    );
+    
+                    return {
+                        name: origin.represents ? origin.represents.name : origin.name,
+                        code: code ? code : null
+                    }
+                }
+    
                 return {
-                    name: origin.represents ? origin.represents.name : origin.name,
-                    code
+                    sport: data.sport ? data.sport.name : null,
+                    modality: data.modality ? data.modality.name : null,
+                    category: data.category ? data.category.name : null,
+                    stage: data.stage ? data.stage : null,
+                    starts_at: `${data.startDate} ${data.startHour}`,
+                    participants: data.participants ? {
+                        type: data.participants.a.__typename === 'Country' ? 'COUNTRIES' : 'ATHLETES',
+                        entities: [
+                            {
+                                name: data.participants.a.name,
+                                origin: getOrigin(data.participants.a),
+                                emoji_flag: getOrigin(data.participants.a).code ? getCountryFlagEmoji(`flag-${getOrigin(data.participants.a).code.toLowerCase()}`) : '🏳️'
+                            },
+                            {
+                                name: data.participants.b.name,
+                                origin: getOrigin(data.participants.b),
+                                emoji_flag: getOrigin(data.participants.b).code ? getCountryFlagEmoji(`flag-${getOrigin(data.participants.b).code.toLowerCase()}`) : '🏳️'
+                            }
+                        ]
+                    } : null
                 }
             }
-
-            return {
-                sport: data.sport ? data.sport.name : null,
-                modality: data.modality ? data.modality.name : null,
-                category: data.category ? data.category.name : null,
-                stage: data.stage ? data.stage : null,
-                starts_at: `${data.startDate} ${data.startHour}`,
-                participants: data.participants ? {
-                    type: data.participants.a.__typename === 'Country' ? 'COUNTRIES' : 'ATHLETES',
-                    entities: [
-                        {
-                            name: data.participants.a.name,
-                            origin: getOrigin(data.participants.a),
-                            emoji_flag: getCountryFlagEmoji(`flag-${getOrigin(data.participants.a).code.toLowerCase()}`)
-                        },
-                        {
-                            name: data.participants.b.name,
-                            origin: getOrigin(data.participants.b),
-                            emoji_flag: getCountryFlagEmoji(`flag-${getOrigin(data.participants.b).code.toLowerCase()}`)
-                        }
-                    ]
-                } : null
-            }
+        
+            return array.map(eachData => parseEachEvent(eachData));
+        } catch (error) {
+            throw error;
         }
-    
-        return array.map(eachData => parseEachEvent(eachData));
     }
 
     async _getData(type) {
