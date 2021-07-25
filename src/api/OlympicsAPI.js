@@ -81,6 +81,10 @@ class OlympicsAPI {
                         code: code ? code : null
                     }
                 }
+
+                if(!data.startDate) {
+                    return null;
+                }
     
                 return {
                     sport: data.sport ? data.sport.name : null,

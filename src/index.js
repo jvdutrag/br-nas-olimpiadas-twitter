@@ -54,6 +54,10 @@ agenda.define('TWEET_CURRENT_EVENT', job => {
 agenda.define('TWEET_SOON_EVENT', job => {
     const game = job.attrs.data;
 
+    if(!game) {
+        return;
+    }
+
     var tweet = null;
 
     if(game.participants) {
