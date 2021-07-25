@@ -82,5 +82,7 @@ agenda.define('TWEET_SOON_EVENT', job => {
   
     // Todos os dias - meia noite
     await agenda.every('00 00 * * *', 'SCHEDULE_ALL_TWEETS');
+
+    await agenda.now('SCHEDULE_ALL_TWEETS');
 })();
 
