@@ -26,7 +26,7 @@ agenda.define('SCHEDULE_ALL_TWEETS', async () => {
         }
 
         // Um jogo começou
-        agenda.schedule(new Date(moment(game.starts_at).format('YYYY-MM-DD HH:mm:ss')), 'TWEET_CURRENT_EVENT', game);
+        agenda.schedule(new Date(moment(game.starts_at).add(2, 'minutes').format('YYYY-MM-DD HH:mm:ss')), 'TWEET_CURRENT_EVENT', game);
     });
 });
 
